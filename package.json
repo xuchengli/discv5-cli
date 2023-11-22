@@ -54,10 +54,11 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@chainsafe/discv5": "^0.6.0",
+    "@chainsafe/discv5": "^5.1.2",
+    "@libp2p/interface": "^0.1.6",
+    "@libp2p/peer-id-factory": "^3.0.8",
+    "@multiformats/multiaddr": "^12.1.10",
     "debug": "^4.1.1",
-    "multiaddr": "^9.0.0",
-    "peer-id": "^0.14.1",
     "randombytes": "^2.1.0",
     "yargs": "^15.3.1"
   }

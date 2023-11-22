@@ -34,7 +34,7 @@ async function init(
   const peerId = await createPeerId();
   const enr = createEnr(peerId);
   writePeerId(peerIdFile, peerId);
-  writeEnr(enrFile, enr, peerId);
+  writeEnr(enrFile, enr);
 }
 
 exports.handler = function(argv: IInput): void {

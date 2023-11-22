@@ -83,7 +83,7 @@ async function init(
   const bootstrapEnrs = readEnrs(bootstrapEnrsFile);
   const bindAddress = getBindAddress(bindAddressString);
 
-  discv5 = Discv5.create({enr: localEnr, peerId, multiaddr: bindAddress});
+  discv5 = Discv5.create({enr: localEnr, peerId, bindAddrs: bindAddress});
   bootstrapEnrs.forEach((enr) => {
     log("Adding bootstrap enr: %s", enr.encodeTxt());
     discv5.addEnr(enr);
@@ -92,7 +92,7 @@ async function init(
 
 async function start(): Promise<void> {
   await discv5.start();
-  log("Service started on %s with local node id: %s", discv5.bindAddress, discv5.enr.nodeId);
+  log("Service started on %s with local node id: %s", discv5.bindAddrs, discv5.enr.nodeId);
 
   while (discv5.isStarted()) {
     const nodeId = toHex(randomBytes(32));
@@ -114,7 +114,7 @@ async function save(
 ): Promise<void> {
   const peerId = await discv5.peerId();
   writePeerId(peerIdFile, peerId);
-  writeEnr(enrFile, discv5.enr, peerId);
+  writeEnr(enrFile, discv5.enr.toENR());
   writeEnrs(outputFile, Object.values(foundEnrs));
 }
 
